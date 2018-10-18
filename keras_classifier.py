@@ -1,14 +1,16 @@
 from google.colab import drive
 drive.mount('/content/drive/')
-from keras.models import Sequential
-from keras.layers import Convolution2D
-from keras.layers import MaxPooling2D
-from keras.layers import Flatten
-from keras.layers import Dense
-from keras.models import load_model
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Convolution2D
+from tensorflow.keras.layers import MaxPooling2D
+from tensorflow.keras.layers import Flatten
+from tensorflow.keras.layers import Dense
+from tensorflow.keras.models import load_model
 import numpy as np
 import pandas as pd
 from google.colab import files
+import os
+import tensorflow as tf
 
 
 classifier = Sequential()
@@ -20,6 +22,11 @@ classifier.add(Flatten())
 classifier.add(Dense(activation="relu", units=512))
 classifier.add(Dense(activation="sigmoid", units=1))
 classifier.compile(optimizer = 'adam', loss = 'binary_crossentropy', metrics = ['accuracy'])
+
+tpu_model = tf.contrib.tpu.keras_to_tpu_model(
+classifier,
+strategy=tf.contrib.tpu.TPUDistributionStrategy(
+    tf.contrib.cluster_resolver.TPUClusterResolver(TPU_WORKER)))
 
 from keras.preprocessing.image import ImageDataGenerator
 
@@ -54,13 +61,13 @@ test_set= test_datagen.flow_from_directory(
 
 classifier.fit_generator(
     training_set,
-    steps_per_epoch=56,
+    steps_per_epoch=400,
     epochs=10,
 )
 
 
 test_set.reset()
-pred=classifier.predict_generator(test_set,verbose=1)
+pred=tpu_model.predict_generator(test_set,verbose=1, steps=1)
 print(pred)
 
 predictions = [round(x[0]) for x in pred]
