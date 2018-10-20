@@ -3,7 +3,7 @@
 An simple image recognition classfier using CNN, Keras and Tensorflow backend on Google Colab  
 ## Dataset  
 [Flower Recognition (Kaggle)](https://www.kaggle.com/alxmamaev/flowers-recognition) (only use daisy and dandelion)  
-Test data are downloaded randomly form Google image  
+Test data are downloaded randomly from Google image  
 ## Directory  
     /content/drive/My Drive/flowers/
         train/
