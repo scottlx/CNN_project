@@ -1,6 +1,6 @@
 # CNN_project
 ## EC601 project2  
-An simple image recognition classfier using CNN, Keras and Tensorflow backend on Google Colab  
+A simple image recognition classfier using CNN, Keras and Tensorflow backend on Google Colab  
 ## Dataset  
 [Flower Recognition (Kaggle)](https://www.kaggle.com/alxmamaev/flowers-recognition) (only use daisy and dandelion)  
 Test data are downloaded randomly from Google image  
