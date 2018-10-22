@@ -74,7 +74,7 @@ dandelion/dandelion7.jpg	 1
 ## Resnet Result
 val_acc: 0.7717  
 
-Filename	              Predictions 
+Filename	              Prediction  
 daisy/daisy1.jpg	        1  
 daisy/daisy2.jpg	        1  
 daisy/daisy3.jpg	        0  
